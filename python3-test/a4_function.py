@@ -15,8 +15,11 @@
 # print(max(a, b))
 
 ## 1.必需参数和关键字参数
-# 必需参数： 以正确的顺序传入函数。调用时的数量必须和声明时的一样
+# 必需(Positional)参数： 以正确的顺序传入函数。调用时的数量必须和声明时的一样
 # 关键字参数： 使用关键字参数允许函数调用时参数的顺序与声明时不一致，因为 Python 解释器能够用参数名匹配参数值
+
+
+# Positional argument cannot appear after keyword argumentsPylance
 
 
 # def printinfo( name, age=50 ): # 默认参数设置
@@ -47,7 +50,7 @@
 #     print ("输出: ")
 #     print (arg1)
 #     print (vardict)
-#
+
 # printinfo(1, a=2,b=3)
 
 ## 3.匿名函数 Python 使用 lambda 来创建匿名函数。

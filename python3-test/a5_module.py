@@ -15,18 +15,18 @@ sys.path 包含了一个 Python 解释器自动查找所需模块的路径的列
 
 
 # 1.1 导入模块(引用需要加模块名前缀) 一个模块被另一个程序第一次引入时，其主程序将运行。
-# import support
-#
-# # 现在可以调用模块里包含的函数了
-# support.print_func("Runoob")
+import support
+
+# 现在可以调用模块里包含的函数了
+support.print_func("Runoob")
 
 # 1.2 导入部分
 # from 模块 import 指定部分(省去了模块名前缀)
 # from 模块 import *  导入模块所有内容，那些由单一下划线（_）开头的名字不在此例(省去了模块名前缀)
 
-from support import print_func
+# from support import print_func
 
-print_func("Runbbb")
+# print_func("Runbbb")
 
 # 1.3 __name__属性:  一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用__name__属性来使该程序块仅在该模块自身运行时执行。
 if __name__ == '__main__':

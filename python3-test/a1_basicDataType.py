@@ -9,15 +9,15 @@ import operator
 
 # switch line
 total = 1 + \
-        2 + \
-        4
+    2 + \
+    4
 # print(total)
 
 # set multi values
-aa = bb =111
+aa = bb = 111
 # print(aa,bb) # 111 111
 
-aa,bb,cc = 11,22,33
+aa, bb, cc = 11, 22, 33
 # print(aa,bb,cc) # 11 22 33
 
 """
@@ -32,14 +32,17 @@ isinstance 是否属于该类型及其子类
         
 """
 
-#1. number
-aa,bb,cc,dd=11,1.1,"1.2",True
+# 1. number
+aa, bb, cc, dd = 11, 1.1, "1.2", True
 # print(type(aa),type(bb),type(cc),type(dd)) # <class 'int'> <class 'float'> <class 'str'> <class 'bool'>
 
+
 class A:
-  pass
+    pass
+
+
 class B(A):
-  pass
+    pass
 # print(isinstance(aa,int))   #Ture
 # print(type(aa) == int)      #Ture
 # print(isinstance(B(),A))    #Ture
@@ -48,9 +51,10 @@ class B(A):
 #
 # print(issubclass(bool,int))   #Ture
 
-#2. string
+
+# 2. string
 # '' "" ， \转义   r禁止转义
-s1 = 'ss' # s2 = "ss"
+s1 = 'ss'  # s2 = "ss"
 
 str = 'Runoob'
 str.split()
@@ -63,37 +67,37 @@ str.split()
 # print (str + "TEST") # 连接字符串
 # print(r'Ru\noob')    # Ru\noob
 
-# f-string 引用变量
+# f-string 引用变量 
+# It allows you to embed expressions inside string literals by enclosing them in curly braces ({}), which are then evaluated at runtime and inserted into the string.
 # print(f"testName {name}")
 
 # 3. list
 
-list = [ 'abcd', 786 , 2.23, 'runoob', 70.2 ]
+list2 = ['abcd', 786, 2.23, 'runoob', 70.2]
 tinylist = [123, 'runoob']
 list1 = [['kknoob', 7.2], [133, 'nokb']]
 
-# print (list)              # 输出完整列表
-# print (list[0])           # 输出列表第一个元素
-# print (list[1:3])         # 从第二个开始输出到第三个元素
-# print (list[2:])          # 输出从第三个元素开始的所有元素
+# print (list2)              # 输出完整列表
+# print (list2[0])           # 输出列表第一个元素
+# print (list2[1:3])         # 从第二个开始输出到第三个元素
+# print (list2[2:])          # 输出从第三个元素开始的所有元素
 # print (tinylist * 2)      # 输出两次列表
-# print (list + tinylist)   # 连接列表
-# list[-1::-1] 有三个参数
-# print(list[-1::-1])       #list[-1::-1] 有三个参数:第一个参数 -1 表示最后一个元素;第二个参数为空，表示移动到列表末尾;第三个参数为步长，-1 表示逆向
-# list.append("element")    # 增
-# list.remove(786)          # 删1
-# del list[1]               # 删2
+# print (list2 + tinylist)   # 连接列表
+# list2[-1::-1] 有三个参数
+# print(list2[-1::-1])       #list[-1::-1] 有三个参数:第一个参数 -1 表示最后一个元素;第二个参数为空，表示移动到列表末尾;第三个参数为步长，-1 表示逆向
+# list2.append("element")    # 增
+# list2.remove(786)          # 删1
+# del list2[1]               # 删2
 # list[2]="ele2"            # 改
-# operator.eq(list1, list) #列表比较需要引入 operator 模块的 eq 方法
-
+# print(operator.eq(list1, list2)) #列表比较需要引入 operator 模块的 eq 方法
 
 
 # 4.Tuple 与list类似，但是元组内的元素不能修改.
 
-tuple1 = ( 'abcd', 786 , 2.23, 'runoob', 70.2  )
+tuple1 = ('abcd', 786, 2.23, 'runoob', 70.2)
 tinytuple = (123, 'runoob')
 
-#元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：
+# 元组中只包含一个元素时，需要在元素后面添加逗号 , ，否则括号会被当作运算符使用：
 # print(type((23,)))  #<class 'tuple'>
 # print(type((23)))   #<class 'int'>
 
@@ -107,13 +111,11 @@ tinytuple = (123, 'runoob')
 # print(tuple1)             NameError: name 'tuple1' is not defined
 
 
-
 # 5. Set        使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。
 
 sites = {'Google', 'Taobao', 'Runoob', 'Facebook', 'Zhihu', 'Baidu'}
 sites2 = {"marks"}
 # print(sites)   # 输出集合，重复的元素被自动去掉
-
 # # 成员测试
 # if 'Runoob' in sites :
 #     print('Runoob 在集合中')
@@ -142,15 +144,14 @@ sites2 = {"marks"}
 # sites.copy()              #集合copy
 
 
-
 # 6. Dictionary 字典 类似于Map。 键必须不可变，所以可以用数字，字符串或元组充当，而用列表就不行
 
 dict1 = {}      # 等同 dict1 = dict()
 dict1['one'] = "1 - 菜鸟教程"
-dict1[2]     = "2 - 菜鸟工具"
+dict1[2] = "2 - 菜鸟工具"
 
-tinydict = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
-dict2 = {('22',3343,"dsad"):"zhangsan"}
+tinydict = {'name': 'runoob', 'code': 1, 'site': 'www.runoob.com'}
+dict2 = {('22', 3343, "dsad"): "zhangsan"}
 
 #
 # print (dict1['one'])       # 输出键为 'one' 的值
@@ -172,7 +173,8 @@ dict2 = {('22',3343,"dsad"):"zhangsan"}
 #     print(k,end=",")          #one,2,
 # for k,v in dict1.items():
 #     print(k,v,end=",")                # one 1 - 菜鸟教程,2 2 - 菜鸟工具,
-
+# for k in list(dict1.keys()):
+#     print(k)
 
 '''
 数据类型转换
@@ -217,14 +219,15 @@ xx推导式：推导出一个新列表
 [out_exp_res for out_exp in input_list if condition]
 '''
 
-# names = ["zhangsan","lisi","wangwu"]
+names = ["zhangsan","lisi","wangwu"]
+
 # longNames = [name.upper() for name in names ] # ['ZHANGSAN', 'LISI', 'WANGWU']
 # longNames = [name.upper() for name in names if len(name)>5] #['ZHANGSAN', 'WANGWU']
 # multiples = [i for i in range(30) if i % 3 == 0] # [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
 
 
-names = ["zhangsan",'liSI',"lisi"]
-upperNames = { n.upper() for n in names }
+names = ["zhangsan", 'liSI', "lisi"]
+upperNames = {n.upper() for n in names}
 
 # print(upperNames)
 
@@ -237,10 +240,10 @@ upperNames = { n.upper() for n in names }
 
 '''
 
-# scores = {"zhangsan":23,"lisi":90,"wangwu":100}
-# nameLens = {name :len(name) for name in scores} # {'zhangsan': 8, 'lisi': 4, 'wangwu': 6}
+scores = {"zhangsan":23,"lisi":90,"wangwu":100}
+print({name : scores[name] for name in scores}) # {'zhangsan': 23, 'lisi': 90, 'wangwu': 100}
 # player=["zhangsan","lisi","wangwu","wangyilang"]
-# wangPlayerNameLens = {name : len(name) for name in player if name.startswith("wang")} # {'wangwu': 6, 'wangyilang': 10}
+# print({name : len(name) for name in player if name.startswith("wang")}) # {'wangwu': 6, 'wangyilang': 10}
 
 '''
 3.集合推导式

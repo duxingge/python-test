@@ -33,7 +33,7 @@ else:
 # while <expr>:
 #     <statement(s)>
 # else:
-#     <additional_statement(s)>     #只执行一次
+#     <additional_statement(s)>     #只跳出时执行一次
 
 # count = 0
 # while count < 5:
@@ -66,13 +66,14 @@ else:
 
 # 4.1 迭代器的基本方法： iter()和next()
 
-# list=[1,2,3,4]
-# it = iter(list)
+list1=[1,2,3,4]
+# it = iter(list1)
 # while True :
 #     try:
 #         print(next(it))
 #     except StopIteration:
 #         sys.exit()
+
 
 #4.2 实现迭代器
 # 把一个类作为一个迭代器使用需要在类中实现两个方法 __iter__() 与 __next__() 。
