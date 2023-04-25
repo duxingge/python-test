@@ -6,12 +6,13 @@
 # repr()： 产生一个解释器易读的表达形式。
 
 # for x in range(1, 11):
-#     print(repr(x).rjust(2), repr(x*x).rjust(3), end=' ')
+#     print(repr(x).rjust(2), repr(x*x).rjust(3), end=' ') #以' '结尾，而不是换行符
 #     # 注意前一行 'end' 的使用
 #     print(repr(x*x*x).rjust(4))
 
 # 1.2 str.format()
 # print('{}网址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
+
 # 菜鸟教程网址： "www.runoob.com!"
 # print('{1} 和 {0}'.format('Google', 'Runoob'))
 # Runoob 和 Google

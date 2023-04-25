@@ -43,7 +43,7 @@ import support
 # 目录只有包含一个叫做 __init__.py 的文件才会被认作是一个包
 # 导入语句遵循如下规则：如果包定义文件 __init__.py 存在一个叫做 __all__ 的列表变量，那么在使用 from package import * 的时候就把这个列表中的所有名字作为包内容导入。
 
-# sound/                          顶层包
+# sound/                          顶层包 
 #     __init__.py               初始化 sound 包
 #     formats/                  文件格式转换子包
 #         __init__.py
