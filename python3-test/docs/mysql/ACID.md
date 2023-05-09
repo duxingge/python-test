@@ -8,12 +8,12 @@
 # 3.处理问题的手段
 - 读锁S，共享锁
 - 写所X，排它锁
-- 意向锁 Intention Lock : 当事务1给某条记录加X锁后，事务2想向表加X锁，则需要遍历该表中的所有记录来判断是否有记录存在X锁，如果有一条记录被加了X锁，则事务2需要等待事务1完成。这种遍历的方式非常低效，Mysql在后来引入了意向锁的概念，用来解决这种问题。当事务1对某条记录加X锁前，首先需要对表加IX锁。当事务2需要对表加X锁时，只需要判断表上是否含有IX锁，如果有，则进行等待。
+- 意向锁 Intention Lock 
     - 读意向锁IS
     - 写意向锁IX
 - 间隙锁GAP
 
-> 临键锁 next-key Lock : 主要解决幻读， 是记录锁与间隙锁的组合，即包含索引记录，也包含索引区间
+> 临键锁 next-key Lock : 主要在当前读场景解决幻读， 是记录锁与间隙锁的组合，即包含索引记录，也包含索引区间
 
 >什么是意向锁? 
 >
@@ -28,29 +28,9 @@
 |----------------------|---------------------|---------------|
 |READ UNCOMMITTED | dirty read/ no repeatable read / phandom read | |
 |READ COMMITTED |  no repeatable read / phandom read | MVCC|
-|REPEATABLE READ|  phandom read | add readLock when read|
+|REPEATABLE READ|  phandom read | MVCC|
 |Serializable||add Gap lock |
 
-## GAP Lock
-
-简单查询： where col1 = xx
-
-1. col1 唯一索引 ：
-        
-        xx存在： 锁xx行
-
-        xx不存在：锁xx行上-下
-    非唯一索引(优先根据普通索引排序，再根据聚簇索引排序):
-
-        锁xx行上-下
-
-> number为普通索引： SELECT * FROM `test1` WHERE `number` = 3 FOR UPDATE;      
-![number主排序，聚簇索引Id辅排序](./../pic/gap_index_tree.png)
-锁住了(1,1)-(7,8)之间的数据
-
-范围查询: where col1 > xx and col1 < yy
-        下限 = xx存在? xx  :  [xx
-        上线 = yy存在? yy  :  yy]
 
 
 
@@ -72,7 +52,7 @@
 
 #### 3.roll_pointer 回滚指针
 1. 事务对当前行进行改动时，会将旧数据写入undo log中，再将新数据写入当前行，然后将当前行的roll_pointer指针指向刚才写入undo log的旧数据，因此可以通过roll_pointer找到改行的上一个版本。
-2. 当一直有事务改动时，就会生成undoLog,最终形成undo log版本链
+2. 当有事务改动时，就会生成undoLog,最终形成undo log版本链
 
 -------------
 
@@ -98,7 +78,7 @@
 > - delete
 > - update 
 
-> 在RR级别下，快照读是通过MVCC(多版本控制)和undo log来实现的，当前读是通过加记录锁和间隙锁，即临键锁来实现的
+> 在RR级别下解决幻读：快照读是通过MVCC(多版本控制)和undo log来实现的，当前读是通过加记录锁和间隙锁，即临键锁来实现的
 
 在事务执行每一个快照读或事务初次执行快照读时，会生成一致性视图，即ReadView。
 
@@ -130,3 +110,32 @@ MVCC在RC与RR级别下的区别，在于生成ReadView的频率不同：
 2. 在RR级别下，当前事务当然也能够读取到别的事务已经提交的数据，但为了避免不可重复读，因此只会在执行第一次快照读的情况下去生成ReadView，之后的快照读会一直沿用该ReadView。
 
 ![](./../pic/read_view_sample.png)
+
+
+
+## GAP Lock 
+（REPEATABLE READ下 仅当前读时才会加来解决幻读，快照读因为读的是快照，所以不会有幻读）
+
+简单查询： where col1 = xx
+
+1.  col1 唯一索引 ：
+        
+        xx存在： 锁xx行
+
+        xx不存在：锁xx行上-下
+2.  非唯一索引(优先根据普通索引排序，再根据聚簇索引排序):
+
+        锁xx行上-下
+
+3.  无索引:
+
+    全表(按聚簇索引)扫描，全表所有间隙都加Gap Lock
+
+
+> number为普通索引： SELECT * FROM `test1` WHERE `number` = 3 FOR UPDATE;      
+![number主排序，聚簇索引Id辅排序](./../pic/gap_index_tree.png)
+锁住了(1,1)-(7,8)之间的数据
+
+范围查询: where col1 > xx and col1 < yy
+        下限 = xx存在? xx  :  [xx
+        上线 = yy存在? yy  :  yy]
